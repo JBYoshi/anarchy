@@ -1,0 +1,78 @@
+body {
+  background-color: rgb(56, 56, 56);
+  color: white;
+  font-size: 16pt;
+  font-family: "Splatoon 2";
+}
+.small {
+  font-size: 13pt;
+}
+
+@font-face {
+  font-family: "Splatoon 1";
+  src: url("https://frozenpandaman.github.io/Splatoon1.otf");
+}
+@font-face {
+  font-family: "Splatoon 2";
+  src: url("https://frozenpandaman.github.io/Splatoon2.otf");
+}
+input, select, option {
+  font-family: "Splatoon 2";
+}
+
+h1, h2 {
+  margin-top: 0;
+  font-family: "Splatoon 1";
+}
+
+button {
+  font-family: "Splatoon 1";
+  font-size: inherit;
+  padding: 0.4em;
+  margin: 0.3em;
+  border-radius: 0;
+  border: 0;
+  background-color: rgb(219, 225, 0);
+}
+.victory-defeat-swap:not(:disabled) {
+  box-shadow: -4px 4px rgb(91, 55, 222);
+}
+.defeat {
+  color: white;
+  background-color: rgb(91, 55, 222);
+}
+.defeat.victory-defeat-swap:not(:disabled) {
+  box-shadow: -4px 4px rgb(219, 225, 0);
+}
+
+.medal {
+  aspect-ratio: 1;
+  height: 1.5em;
+  display: block;
+}
+
+.gray {
+  filter: brightness(10000%) brightness(30%);
+}
+
+.medal-list {
+  margin: 0.2em;
+}
+
+.app-top {
+  display: grid;
+}
+
+.section {
+  background-color: #111;
+  padding: 40px;
+  border-radius: 40px;
+  margin: 20px;
+}
+
+@media (min-width: 800px) {
+  .app-top {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: max-content;
+  }
+}
