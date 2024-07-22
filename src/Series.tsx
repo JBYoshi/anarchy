@@ -4,7 +4,7 @@ import GoldMedal from "./assets/goldmedal.png";
 import SilverMedal from "./assets/silvermedal.png";
 import { MatchResults, SERIES_LOSSES, SERIES_WINS_BY_TYPE, SeriesType } from "./anarchy";
 
-function RangeSelect({value, max, setValue, item}: {value: number, max: number, setValue: (newValue: number) => void, item: (selected: boolean, i: number) => JSX.Element}) {
+function RangeSelect({value, max, setValue, item}: {value: number, max: number, setValue: (newValue: number) => void, item: () => JSX.Element}) {
     let [hoverValue, setHoverValue] = useState<number | null>(null);
     let pickers = [];
     let groupId = useId();
@@ -22,10 +22,10 @@ function RangeSelect({value, max, setValue, item}: {value: number, max: number, 
                 if (index == hoverValue) setHoverValue(null);
             }} 
         >
-            <input id={buttonId} name={groupId} type="checkbox" style="display: none;" checked={selected} onChange={e => {
+            <input id={buttonId} name={groupId} type="checkbox" style="display: none;" checked={selected} onChange={() => {
                 setValue(valueToSetOnClick);
                 setHoverValue(null);
-            }}/><label for={buttonId} class="label">{ item(value >= index, index) }</label>
+            }}/><label for={buttonId} class="label">{ item() }</label>
         </span>);
     }
     return <div style="display: flex; flex-direction: row;">
@@ -48,13 +48,13 @@ function SeriesMatch({key, match, type, changeWinDisabled, onMatchUpdated, onMat
                 match2.gold = gold;
                 if (match2.silver > 3 - match2.gold) match2.silver = 3 - match2.gold;
                 onMatchUpdated(match2);
-            }} max={3} item={(selected, i) => <img class="medal" src={GoldMedal} />}/>
+            }} max={3} item={() => <img class="medal" src={GoldMedal} />}/>
             <RangeSelect value={match.silver} setValue={silver => {
                 let match2 = {...match};
                 match2.silver = silver;
                 if (match2.gold > 3 - match2.silver) match2.gold = 3 - match2.silver;
                 onMatchUpdated(match2);
-            }} max={3} item={(selected, i) => <img class="medal" src={SilverMedal} />}/>
+            }} max={3} item={() => <img class="medal" src={SilverMedal} />}/>
         </div> }
         <button style="aspect-ratio: 1" onClick={onMatchRemoved}>-</button>
     </div>;
