@@ -63,6 +63,8 @@ function nameForSeriesType(type: SeriesType | null) {
 export function App() {
   const [draftModel, setModel] = useState(new Anarchy());
   const [editMode, setEditMode] = useState(false);
+  const [anarchyOpenOperation, setAnarchyOpenOperation]
+      = useState<"victory" | "defeat" | null>(null);
 
   useEffect(function() {
     let data = localStorage.getItem("anarchy");
@@ -109,12 +111,26 @@ export function App() {
               let newModel = finalizedModel.copy();
               newModel.winOpen();
               setModel(newModel);
+              setAnarchyOpenOperation("victory");
             }}>VICTORY</button>
             <button class="defeat" onClick={() => {
               let newModel = finalizedModel.copy();
               newModel.loseOpen();
               setModel(newModel);
+              setAnarchyOpenOperation("defeat");
             }}>DEFEAT</button>
+            {anarchyOpenOperation != null && <button onClick={() => {
+              let newModel = finalizedModel.copy();
+              if (anarchyOpenOperation == "victory") {
+                newModel.undoWinOpen();
+              } else {
+                newModel.undoLoseOpen();
+              }
+              setModel(newModel);
+              setAnarchyOpenOperation(null);
+            }}>
+              Undo
+            </button>}
           </div>
         </div>
         <div>

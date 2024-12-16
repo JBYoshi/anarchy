@@ -66,7 +66,7 @@ export class Rank {
 
 export enum SeriesType {
     SERIES = "series", RANK_UP_BATTLE = "rankup"
-};
+}
 
 export const SERIES_WINS_BY_TYPE: Record<SeriesType, number> = {
     [SeriesType.SERIES]: 5,
@@ -190,8 +190,16 @@ export class Anarchy {
         this.points += OPEN_WIN_POINTS;
     }
 
+    undoWinOpen() {
+        this.points -= OPEN_WIN_POINTS;
+    }
+
     loseOpen() {
         this.points -= this.rank.openLossPoints;
+    }
+
+    undoLoseOpen() {
+        this.points += this.rank.openLossPoints;
     }
 
     get pointsGainedThisSeries() {
