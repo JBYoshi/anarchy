@@ -105,7 +105,7 @@ export function App() {
           </div>
           <div class="section">
             <h2>Anarchy Open</h2>
-            <button onClick={() => {
+            <button class="victory" onClick={() => {
               let newModel = finalizedModel.copy();
               newModel.winOpen();
               setModel(newModel);
@@ -132,16 +132,24 @@ export function App() {
               setModel(newModel);
             }}></Series>
           </>}
-          {(!draftModel.seriesInProgress || draftModel.isSeriesComplete) && <div>
+          {(!draftModel.seriesInProgress || draftModel.isSeriesComplete) && <div style={{display: "flex", flexDirection: "row"}}>
             <button onClick={() => {
               let newModel = draftModel.copy();
               if (newModel.seriesInProgress) newModel.endSeries();
               newModel.startSeries();
               setModel(newModel);
-            }}>
+            }} class="highlight">
               New {finalizedModel.isRankUpBattleReady ? "Rank-Up Battle" : "Series"}
               <br />
-              <span class="small">Pay {finalizedModel.rank.seriesEntryFeePoints} pts</span></button>
+              <span class="small">Pay {finalizedModel.rank.seriesEntryFeePoints} pts</span>
+            </button>
+            {draftModel.isSeriesComplete && <button onClick={() => {
+              let newModel = draftModel.copy();
+              newModel.endSeries();
+              setModel(newModel);
+            }}>
+              Clear
+            </button>}
           </div>}
         </div>
         </div>

@@ -39,6 +39,10 @@ button {
   margin: 0.3em;
   border-radius: 0;
   border: 0;
+  color: white;
+  background-color: #444;
+}
+.victory, .highlight {
   color: black;
   background-color: rgb(219, 225, 0);
 }

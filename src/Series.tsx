@@ -39,7 +39,7 @@ function SeriesMatch({key, match, type, changeWinDisabled, onMatchUpdated, onMat
             let match2 = {...match};
             match2.win = !match2.win;
             onMatchUpdated(match2);
-        }} class={match.win ? "victory-defeat-swap" : "defeat victory-defeat-swap"}>
+        }} class={match.win ? "victory victory-defeat-swap" : "defeat victory-defeat-swap"}>
             {match.win ? "VICTORY" : "DEFEAT"}
         </button>
         { type != SeriesType.RANK_UP_BATTLE && <div class="medal-list" style="display: flex; flex-direction: column;">
@@ -82,7 +82,7 @@ export default function Series({matches, type, onMatchesUpdated}: {matches: Matc
             <span>Add:</span>
             <button onClick={() => {
                 onMatchesUpdated([...matches, {win: true, gold: 0, silver: 0}]);
-            }}>VICTORY</button>
+            }} class="victory">VICTORY</button>
             <button onClick={() => {
                 onMatchesUpdated([...matches, {win: false, gold: 0, silver: 0}]);
             }} class="defeat">DEFEAT</button>
