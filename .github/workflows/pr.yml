@@ -1,0 +1,24 @@
+# Simple workflow for deploying static content to GitHub Pages
+# From https://dev.to/daslaw/deploying-a-vite-app-to-github-pages-using-github-actions-a-step-by-step-guide-2p4h
+name: Deploy to GitHub Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  pull_request:
+
+jobs:
+  # Single deploy job since we're just deploying
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
