@@ -6,6 +6,8 @@ on:
   # Runs on pushes targeting the default branch
   pull_request:
 
+  workflow_call:
+
 jobs:
   # Single deploy job since we're just deploying
   test:
@@ -16,7 +18,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version-file: package.json
           cache: 'npm'
       - name: Install dependencies
         run: npm install
