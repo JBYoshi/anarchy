@@ -6,8 +6,6 @@ on:
   # Runs on pushes targeting the default branch
   pull_request:
 
-  workflow_call:
-
 jobs:
   # Single deploy job since we're just deploying
   test:
