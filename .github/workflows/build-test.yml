@@ -1,6 +1,4 @@
-# Simple workflow for deploying static content to GitHub Pages
-# From https://dev.to/daslaw/deploying-a-vite-app-to-github-pages-using-github-actions-a-step-by-step-guide-2p4h
-name: Deploy to GitHub Pages
+name: Build and Test
 
 on:
   # Runs on pushes targeting the default branch
