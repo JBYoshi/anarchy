@@ -44,23 +44,24 @@ export class Rank {
     }
 
     static {
-        new Rank("C-", 0, 20, 1, 0, 200, false);
-        new Rank("C", 20, 20, 1, 200, 400, false);
-        new Rank("C+", 40, 20, 1, 400, 600, true);
-        new Rank("B-", 55, 30, 2, 100, 350, false);
-        new Rank("B", 70, 30, 2, 350, 600, false);
-        new Rank("B+", 85, 30, 2, 600, 850, true);
-        new Rank("A-", 110, 40, 3, 200, 500, false);
-        new Rank("A", 120, 40, 3, 500, 800, false);
-        new Rank("A+", 130, 40, 3, 800, 1100, true);
-        new Rank("S", 170, 50, 4, 300, 1000, true);
+        // TODO: open loss points changed in 10.0.0; only verified A and S
+        new Rank("C-", 0, 20, 3, 0, 200, false);
+        new Rank("C", 20, 20, 3, 200, 400, false);
+        new Rank("C+", 40, 20, 3, 400, 600, true);
+        new Rank("B-", 55, 30, 5, 100, 350, false);
+        new Rank("B", 70, 30, 5, 350, 600, false);
+        new Rank("B+", 85, 30, 5, 600, 850, true);
+        new Rank("A-", 110, 40, 8, 200, 500, false);
+        new Rank("A", 120, 40, 8, 500, 800, false);
+        new Rank("A+", 130, 40, 8, 800, 1100, true);
+        new Rank("S", 170, 50, 10, 300, 1000, true);
 
         // TODO: not sure if this is accurate
         for (let i = 0; i < 50; i++) {
-            new Rank("S+" + i, 180, 50, 5, 300, 300 + 350 * (i % 10 + 1), i % 10 == 9);
+            new Rank("S+" + i, 180, 50, 10, 300, 300 + 350 * (i % 10 + 1), i % 10 == 9);
         }
         // Behavior at maximum from https://www.youtube.com/watch?v=hmZWG0Y_3Ag
-        new Rank("S+50", 180, 50, 5, 300, 9999, false);
+        new Rank("S+50", 180, 50, 10, 300, 9999, false);
     }
 }
 
@@ -75,7 +76,7 @@ export const SERIES_WINS_BY_TYPE: Record<SeriesType, number> = {
 export const SERIES_LOSSES = 3;
 export const GOLD_VALUE = 5;
 export const SILVER_VALUE = 1;
-export const OPEN_WIN_POINTS = 8;
+export const OPEN_WIN_POINTS = 20;
 export const MAX_POINTS = 9999;
 export const MIN_POINTS = -9999; // TODO not sure what the real minimum is
 
