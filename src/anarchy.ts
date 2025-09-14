@@ -91,6 +91,7 @@ export interface AnarchyJSON {
     points: number;
     seriesInProgress: SeriesType | null;
     seriesMatches: MatchResults[];
+    date?: number;
 }
 
 export class Anarchy {
@@ -262,8 +263,13 @@ export class Anarchy {
             rank: this.rank.name,
             points: this.points,
             seriesInProgress: this.seriesInProgress,
-            seriesMatches: this.seriesMatches
+            seriesMatches: this.seriesMatches,
+            date: new Date().getTime()
         };
+    }
+
+    private resetSeason(): void {
+        this.points = this.rank.startPoints;
     }
 
     static load(json: AnarchyJSON): Anarchy {
@@ -272,6 +278,46 @@ export class Anarchy {
         model.points = json.points;
         model.seriesInProgress = json.seriesInProgress;
         model.seriesMatches = json.seriesMatches;
+        
+        if (json.date) {
+            let saveSeason = Anarchy.getSeason(new Date(json.date));
+            let loadSeason = Anarchy.getSeason(new Date());
+            if (saveSeason != loadSeason) {
+                model.resetSeason();
+            }
+        }
         return model;
+    }
+
+    private static getSeason(date: Date): string {
+        let [yearS, monthS] = date.toISOString().split("-");
+        let year = parseInt(yearS);
+        let month = parseInt(monthS);
+        
+        switch (month) {
+            case 1:
+            case 2:
+                year--;
+                month = 12;
+                break;
+            case 3:
+            case 4:
+            case 5:
+                month = 3;
+                break;
+            case 6:
+            case 7:
+            case 8:
+                month = 6;
+                break;
+            case 9:
+            case 10:
+            case 11:
+                month = 9;
+                break;
+            case 12:
+                break;
+        }
+        return year + "-" + (month < 10 ? "0" : "") + month;
     }
 }
